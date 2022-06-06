@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 //assigning express to a constant
 const app = express();
 
+//setthing the ejs view engine
+app.set('view engine', 'ejs');
+
 //getting the request from home route
 app.get("/", function(req, res) {
 
@@ -18,12 +21,10 @@ app.get("/", function(req, res) {
   //checking if today is a weekend
   //6 for Saturday and 0 is for Sunday
   if (currentDay === 6 || currentDay === 0) {
-    res.write("<h1>yay, it's the weekend!</h1>");
+    res.write(__dirname + "/weekend.html");
     res.send();
   } else {
-    res.write("<p>It is not a weekend</p>");
-    res.write("<h1>Boo! I have to work :c</h1>");
-    res.send();
+    res.sendFile(__dirname + "/weekday.html");
   }
 });
 
