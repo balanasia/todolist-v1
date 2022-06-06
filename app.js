@@ -9,7 +9,22 @@ const app = express();
 
 //getting the request from home route
 app.get("/", function(req, res) {
-  res.send("Hello!");
+
+  //initialize variable that will hold a date variable
+  var today = new Date();
+  //get today's day
+  var currentDay = today.getDay();
+
+  //checking if today is a weekend
+  //6 for Saturday and 0 is for Sunday
+  if (currentDay === 6 || currentDay === 0) {
+    res.write("<h1>yay, it's the weekend!</h1>");
+    res.send();
+  } else {
+    res.write("<p>It is not a weekend</p>");
+    res.write("<h1>Boo! I have to work :c</h1>");
+    res.send();
+  }
 });
 
 //express is listening at port 3000
