@@ -18,14 +18,46 @@ app.get("/", function(req, res) {
   //get today's day
   var currentDay = today.getDay();
 
-  //checking if today is a weekend
-  //6 for Saturday and 0 is for Sunday
-  if (currentDay === 6 || currentDay === 0) {
-    res.write(__dirname + "/weekend.html");
-    res.send();
-  } else {
-    res.sendFile(__dirname + "/weekday.html");
-  }
+  //emtpy string to hold a day value
+  var day = "";
+
+  switch(currentDay) {
+    case 0:
+      day="Sunday";
+    break;
+
+    case 1:
+      day="Monday";
+    break;
+
+    case 2:
+      day="Tuesday";
+    break;
+
+    case 3:
+      day="Wednesday";
+    break;
+
+    case 4:
+      day="Thursday";
+    break;
+
+    case 5:
+      day="Friday";
+    break;
+
+    case 6:
+      day="Saturday";
+    break;
+
+    default:
+      console.log("Error! Day is" + currentDay);
+
+  }//end switch statement
+
+  //render the list.ejs file
+  //and pass in kindOfDay variable
+  res.render("list", {kindOfDay: day});
 });
 
 //express is listening at port 3000
