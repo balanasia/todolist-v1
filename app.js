@@ -9,10 +9,12 @@ const app = express();
 
 //global variable that will hold the user input
 //that is passed to post and get methods
-var items = [];
+let items = [];
 
 //specify the format for the BodyParser
 app.use(bodyParser.urlencoded({extended:true}));
+//declaring a static folder location for Express
+app.use(express.static("public"));
 
 //setthing the ejs view engine
 app.set('view engine', 'ejs');
@@ -21,17 +23,16 @@ app.set('view engine', 'ejs');
 app.get("/", function(req, res) {
 
   //initialize variable that will hold a date variable
-  var today = new Date();
+  let today = new Date();
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  var day = days[today.getDay()];
 
-  var options = {
+  let options = {
     weekday: "long",
     day: "numeric",
     month: "long"
   };
 
-  var day = today.toLocaleDateString("en-US", options);
+  let day = today.toLocaleDateString("en-US", options);
 
 
   //render the list.ejs file
@@ -40,7 +41,7 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-  var item = req.body.newItem;
+  let item = req.body.newItem;
   items.push(item);
 
   res.redirect("/");

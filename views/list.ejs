@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Weekend</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Weekend</title>
+
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <div class="box" id="heading">
     <h1>Its a <%= kindOfDay %></h1>
+  </div>
 
-    <ul>
-      <li>Buy Food</li>
-      <li>Cook Food</li>
-      <li>Eat Food</li>
+  <div class="box">
+    <!-- Adds new item from the array and create a new li with it -->
+    <% for (var i=0; i<newListItems.length; i++){ %>
+    <div class="item">
+      <input type="checkbox">
+      <p><%= newListItems[i] %></p>
+    </div> <!-- end of item class -->
+    <% } %>
 
-      <!-- Adds new item from the array and create a new li with it -->
-      <% for (var i=0; i<newListItems.length; i++){ %>
-              <li><%= newListItems[i] %></li>
-      <% } %>
-    </ul>
-
-    <form action="/" method="post">
-      <input type="text" name="newItem">
-      <button type="submit" name="button">Submit</button>
-
+    <form class="item" action="/" method="post">
+      <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+      <button type="submit" name="button">+</button>
     </form>
-  </body>
+  </div> <!-- end of box class -->
+</body>
+
 </html>
