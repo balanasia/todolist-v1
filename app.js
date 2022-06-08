@@ -4,6 +4,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+//require date module
+const date = require(__dirname + "/date.js");
+
+
 //assigning express to a constant
 const app = express();
 
@@ -23,18 +27,7 @@ app.set('view engine', 'ejs');
 //getting the request from home route
 app.get("/", function(req, res) {
 
-  //initialize variable that will hold a date variable
-  let today = new Date();
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  let options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  };
-
-  let day = today.toLocaleDateString("en-US", options);
-
+  let day = date.getDate();
 
   //render the list.ejs file
   //and pass in kindOfDay variable
