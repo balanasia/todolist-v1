@@ -10,6 +10,7 @@ const app = express();
 //global variable that will hold the user input
 //that is passed to post and get methods
 let items = [];
+let workItems = [];
 
 //specify the format for the BodyParser
 app.use(bodyParser.urlencoded({extended:true}));
@@ -37,14 +38,37 @@ app.get("/", function(req, res) {
 
   //render the list.ejs file
   //and pass in kindOfDay variable
-  res.render("list", {kindOfDay: day, newListItems: items});
+  res.render("list", {listTitle: day, newListItems: items});
 });
 
 app.post("/", function(req, res) {
-  let item = req.body.newItem;
-  items.push(item);
 
-  res.redirect("/");
+  let item = req.body.newItem;
+
+//checks if the item is added
+//to the work list or to regular list
+//and redirects to porper list
+  if(request.body.list === "Work") {
+    workItems.push(item);
+    res.redirect("/work");
+  } else {
+    items.push(item);
+    res.redirect("/");
+  }
+});
+
+app.get("/work", function(req, res){
+  res.render("list", {listTitle: "Work List ", newListItems: workItems});
+});
+
+app.get("/about", function(req, res) {
+  res.render("about");
+});
+
+app.post("/work", function(req, res){
+  let item = req.body.newItem;
+  workItems.push(item);
+  res.redicrect("/");
 });
 
 //express is listening at port 3000
